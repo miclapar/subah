@@ -245,5 +245,51 @@
 
         loadSheetData();
     </script>
+    <!-- NAVIGASI BAWAH FIXED (PASTIKAN DI PALING BAWAH SEBELUM </body>) -->
+    <div class="fixed bottom-0 left-0 right-0 z-[100] px-6 pb-6 pt-2 bg-gradient-to-t from-slate-50 via-white/90 to-transparent backdrop-blur-md">
+        <nav class="bg-white border border-slate-100 flex justify-between items-center px-6 py-4 rounded-[30px] shadow-[0_20px_50px_rgba(0,0,0,0.1)]">
+            
+            <!-- Beranda -->
+            <div class="flex flex-col items-center gap-1 group cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="text-emerald-600 bg-emerald-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-all active:scale-90 shadow-sm border border-emerald-100/50">
+                    <i class="fas fa-house text-lg"></i>
+                </div>
+                <span class="text-[8px] font-black text-emerald-700 uppercase tracking-tighter">Beranda</span>
+            </div>
+
+            <!-- Materi -->
+            <div class="flex flex-col items-center gap-1 group cursor-pointer">
+                <div class="text-blue-600 bg-blue-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-all active:scale-90 text-opacity-40 group-hover:text-opacity-100 shadow-sm border border-blue-100/50">
+                    <i class="fas fa-book-open text-lg"></i>
+                </div>
+                <span class="text-[8px] font-black text-slate-400 uppercase tracking-tighter group-hover:text-blue-700">Materi</span>
+            </div>
+
+            <!-- QR Scanner (Floating) -->
+            <div class="relative -mt-16">
+                <div class="bg-gradient-to-tr from-emerald-600 to-teal-400 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-[0_10px_25px_rgba(5,150,105,0.4)] border-[6px] border-white active:scale-95 transition-transform">
+                    <i class="fas fa-qrcode text-2xl"></i>
+                </div>
+                <span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[8px] font-black text-emerald-700 uppercase tracking-tighter">Scan</span>
+            </div>
+
+            <!-- Guru -->
+            <div class="flex flex-col items-center gap-1 group cursor-pointer">
+                <div class="text-amber-500 bg-amber-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-all active:scale-90 text-opacity-40 group-hover:text-opacity-100 shadow-sm border border-amber-100/50">
+                    <i class="fas fa-users-rectangle text-lg"></i>
+                </div>
+                <span class="text-[8px] font-black text-slate-400 uppercase tracking-tighter group-hover:text-amber-600">Guru</span>
+            </div>
+
+            <!-- Profil -->
+            <div class="flex flex-col items-center gap-1 group cursor-pointer">
+                <div class="text-purple-600 bg-purple-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-all active:scale-90 text-opacity-40 group-hover:text-opacity-100 shadow-sm border border-purple-100/50">
+                    <i class="fas fa-circle-user text-lg"></i>
+                </div>
+                <span class="text-[8px] font-black text-slate-400 uppercase tracking-tighter group-hover:text-purple-700">Profil</span>
+            </div>
+
+        </nav>
+    </div>
 </body>
 </html>
