@@ -3,268 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MI Clapar Digital | Portal Madrasah</title>
-    
-    <!-- PWA Meta Tags -->
+    <title>MI Clapar Digital</title>
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#059669">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2942/2942503.png">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Tambahkan library animasi -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; -webkit-tap-highlight-color: transparent; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f8fafc; overflow-x: hidden; }
+        
+        /* Animasi Gradient Hidup */
         .hero-bg { 
-            background: linear-gradient(rgba(6, 95, 70, 0.9), rgba(5, 150, 105, 0.95)), 
-            url('https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=1000&q=80');
-            background-size: cover; background-position: center;
+            background: linear-gradient(-45deg, #065f46, #059669, #10b981, #34d399);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
-        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.4); }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Teks Berjalan Modern */
+        .marquee-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 8px 0;
+            border-y: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            color: #ecfdf5;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Card Hover & Skeleton */
+        .card-pop { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card-pop:active { transform: scale(0.95); }
+        
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        .pwa-popup { transform: translateY(120%); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .pwa-popup.show { transform: translateY(0); }
     </style>
 </head>
-<body class="pb-28">
+<body class="pb-32">
 
-    <!-- HERO & BRANDING -->
-    <section class="hero-bg pb-20 pt-8 px-6 rounded-b-[50px] shadow-2xl relative overflow-hidden">
-        <nav class="flex justify-between items-center max-w-4xl mx-auto mb-8 relative z-10">
+    <!-- TEKS BERJALAN (MARQUEE) -->
+    <div class="hero-bg pt-2">
+        <div class="marquee-container">
+            <div class="marquee-text" id="marquee-data">
+                Memuat info terbaru madrasah... • Info PPDB 2026/2027 telah dibuka • Mari tingkatkan hafalan ananda di rumah • 
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg pb-20 pt-6 px-6 rounded-b-[50px] shadow-2xl relative overflow-hidden text-white animate__animated animate__fadeIn">
+        <div class="flex justify-between items-center max-w-4xl mx-auto mb-6 relative z-10">
             <div class="flex items-center gap-3">
-                <div class="bg-white/20 backdrop-blur-md p-2 rounded-2xl border border-white/30">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" alt="Logo" class="w-10 h-10 object-contain">
+                <div class="bg-white/20 backdrop-blur-md p-2 rounded-2xl border border-white/30 animate__animated animate__bounceIn">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-10 h-10 invert">
                 </div>
                 <div>
-                    <h1 class="text-white font-extrabold text-xl leading-none">MI CLAPAR</h1>
-                    <p class="text-emerald-200 text-[9px] tracking-[0.3em] font-bold uppercase mt-1">Subah - Batang</p>
+                    <h1 class="font-extrabold text-xl leading-none tracking-tight">MI CLAPAR</h1>
+                    <p class="text-emerald-200 text-[9px] font-bold tracking-widest mt-1">DIGITAL MADRASAH</p>
                 </div>
             </div>
-            <div class="bg-white/10 p-3 rounded-2xl text-white">
-                <i class="fas fa-bell"></i>
-            </div>
-        </nav>
+        </div>
 
-        <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="text-3xl font-extrabold text-white mb-4 leading-tight">Mencetak Generasi <br><span class="text-emerald-300 italic">Cerdas & Qurani</span></h2>
-            
-            <!-- Dashboard Info Kolektif -->
-            <div class="glass-card p-5 rounded-[35px] shadow-2xl mt-6 border-b-4 border-emerald-500/20">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="bg-emerald-600 w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-lg">
-                        <i class="fas fa-users-viewfinder text-xl"></i>
-                    </div>
+        <!-- STATS DASHBOARD -->
+        <div class="bg-white/95 backdrop-blur-lg p-5 rounded-[35px] shadow-2xl mt-4 border border-white text-slate-800 animate__animated animate__slideInUp">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100 flex items-center gap-3">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></div>
                     <div>
-                        <h4 class="font-bold text-slate-800 text-sm leading-tight">Kebanggaan Kita Bersama</h4>
-                        <p class="text-[10px] text-slate-500 italic">Update capaian belajar seluruh ananda hari ini</p>
+                        <p class="text-[8px] text-emerald-600 font-black uppercase">Presensi</p>
+                        <p id="stat-hadir" class="text-sm font-black">--%</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-100">
-                        <p class="text-[9px] text-emerald-600 font-black uppercase tracking-wider">Kehadiran</p>
-                        <p class="text-sm font-bold text-emerald-900 leading-tight">98.5% <span class="font-normal text-[9px] opacity-70 italic">Disiplin</span></p>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100">
-                        <p class="text-[9px] text-blue-600 font-black uppercase tracking-wider">Hafalan</p>
-                        <p class="text-sm font-bold text-blue-900 leading-tight">85% <span class="font-normal text-[9px] opacity-70 italic">Lancar</span></p>
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 flex items-center gap-3">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <div>
+                        <p class="text-[8px] text-blue-600 font-black uppercase">Infaq</p>
+                        <p id="stat-infaq" class="text-sm font-black">--%</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- QUICK MENU -->
+    <!-- MENU UTAMA -->
     <main class="max-w-4xl mx-auto px-6 -mt-8 relative z-20">
-        <div class="grid grid-cols-4 gap-4 mb-10 text-center">
-            <div class="space-y-2 group">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50 group-active:scale-90 transition">
-                    <i class="fas fa-calendar-check text-xl"></i>
-                </div>
+        <div class="grid grid-cols-4 gap-4 mb-10">
+            <!-- Tombol-tombol ini akan memiliki efek animasi saat ditekan -->
+            <div class="card-pop space-y-2 text-center group cursor-pointer" onclick="vibrate()">
+                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50"><i class="fas fa-calendar-check text-xl"></i></div>
                 <span class="text-[9px] font-bold text-slate-500 uppercase">Absensi</span>
             </div>
-            <div class="space-y-2 group">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-blue-600 border border-blue-50 group-active:scale-90 transition">
-                    <i class="fas fa-file-signature text-xl"></i>
-                </div>
+            <div class="card-pop space-y-2 text-center group cursor-pointer">
+                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-blue-600 border border-blue-50"><i class="fas fa-file-signature text-xl"></i></div>
                 <span class="text-[9px] font-bold text-slate-500 uppercase">Nilai</span>
             </div>
-            <div class="space-y-2 group">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-amber-500 border border-amber-50 group-active:scale-90 transition">
-                    <i class="fas fa-bullhorn text-xl"></i>
-                </div>
+            <div class="card-pop space-y-2 text-center group cursor-pointer">
+                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-amber-500 border border-amber-50"><i class="fas fa-bullhorn text-xl"></i></div>
                 <span class="text-[9px] font-bold text-slate-500 uppercase">Info</span>
             </div>
-            <div class="space-y-2 group">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-purple-600 border border-purple-50 group-active:scale-90 transition">
-                    <i class="fas fa-hand-holding-heart text-xl"></i>
-                </div>
+            <div class="card-pop space-y-2 text-center group cursor-pointer">
+                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-purple-600 border border-purple-50"><i class="fas fa-hand-holding-heart text-xl"></i></div>
                 <span class="text-[9px] font-bold text-slate-500 uppercase">Infaq</span>
             </div>
         </div>
 
-        <!-- KEGIATAN MADRASAH -->
-        <section class="mb-10">
-            <h3 class="font-extrabold text-slate-800 text-lg mb-4 px-2">Aktivitas Madrasah</h3>
-            <div class="flex gap-4 overflow-x-auto no-scrollbar snap-x pb-2">
-                <div class="min-w-[80%] snap-center bg-white rounded-[35px] overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
-                    <div class="p-4 text-center">
-                        <p class="text-xs font-bold text-slate-700 uppercase tracking-tighter">Kelas Tahfidz Quran</p>
-                    </div>
-                </div>
-                <div class="min-w-[80%] snap-center bg-white rounded-[35px] overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80" class="w-full h-40 object-cover">
-                    <div class="p-4 text-center">
-                        <p class="text-xs font-bold text-slate-700 uppercase tracking-tighter">Pembelajaran Digital</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- AGENDA TERDEKAT -->
-        <section class="mb-12">
-            <div class="flex justify-between items-end mb-4 px-2">
-                <h3 class="font-extrabold text-slate-800 text-lg leading-none">Agenda Terdekat</h3>
-                <span class="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Mei 2026</span>
-            </div>
-            
-            <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100 space-y-5">
-                <div class="flex items-center gap-5">
-                    <div class="bg-emerald-100 text-emerald-700 w-14 h-14 rounded-[22px] flex flex-col items-center justify-center">
-                        <span class="text-sm font-black leading-none">15</span>
-                        <span class="text-[8px] uppercase font-bold mt-1 text-emerald-600">Mei</span>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-xs font-black text-slate-800 leading-tight">Ujian Tengah Semester</p>
-                        <p class="text-[10px] text-slate-500 mt-1">Mohon pantau waktu belajar ananda.</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-slate-200 text-xs"></i>
-                </div>
-
-                <div class="h-[1px] bg-slate-50"></div>
-
-                <div class="flex items-center gap-5">
-                    <div class="bg-blue-100 text-blue-700 w-14 h-14 rounded-[22px] flex flex-col items-center justify-center">
-                        <span class="text-sm font-black leading-none">20</span>
-                        <span class="text-[8px] uppercase font-bold mt-1 text-blue-600">Mei</span>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-xs font-black text-slate-800 leading-tight">Parenting Day</p>
-                        <p class="text-[10px] text-slate-500 mt-1">Aula MI - Strategi Belajar Era Digital.</p>
-                    </div>
-                    <i class="fas fa-chevron-right text-slate-200 text-xs"></i>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA PPDB -->
-        <div class="bg-slate-900 rounded-[40px] p-8 text-center shadow-xl mb-10 relative overflow-hidden">
-            <div class="relative z-10">
-                <h4 class="text-white font-black text-lg mb-2">Pendaftaran Siswa Baru</h4>
-                <p class="text-slate-400 text-[10px] mb-6">Tahun Pelajaran 2026/2027 telah dibuka.</p>
-                <button class="bg-amber-400 text-slate-900 text-[10px] font-black px-8 py-4 rounded-2xl uppercase tracking-widest active:scale-95 transition">Daftar Sekarang</button>
-            </div>
-            <i class="fas fa-star-and-crescent absolute -bottom-8 -right-8 text-white opacity-5 text-9xl"></i>
+        <!-- AGENDA SECTION -->
+        <h3 class="font-extrabold text-slate-800 text-lg mb-4 px-2">Agenda Mendatang</h3>
+        <div id="container-agenda" class="space-y-4">
+            <!-- Data dari Sheet akan muncul di sini dengan efek fadeIn -->
         </div>
     </main>
 
-    <!-- NAVIGASI BAWAH MULTI-WARNA (VERSI AKTIF & AMAN) -->
-<nav class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 px-6 py-4 flex justify-between items-center z-50 rounded-t-[30px] shadow-[0_-10px_25px_-5px_rgba(0,0,0,0.05)]">
+    <!-- Navigasi Bawah Multi-Warna tetap sama -->
     
-    <!-- Beranda - Hijau (Default Aktif) -->
-    <div class="flex flex-col items-center gap-1 group cursor-pointer" onclick="location.href='#top'">
-        <div class="text-emerald-600 bg-emerald-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-transform active:scale-90 shadow-sm border border-emerald-100/50">
-            <i class="fas fa-house text-lg"></i>
-        </div>
-        <span class="text-[8px] font-black text-emerald-700 uppercase tracking-tighter">Beranda</span>
-    </div>
-
-    <!-- Materi - Biru (Aman & Edukatif) -->
-    <div class="flex flex-col items-center gap-1 group cursor-pointer">
-        <div class="text-blue-600 bg-blue-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-transform active:scale-90 text-opacity-40 group-hover:text-opacity-100 shadow-sm border border-blue-100/50">
-            <i class="fas fa-book-open text-lg"></i>
-        </div>
-        <span class="text-[8px] font-black text-slate-400 uppercase tracking-tighter group-hover:text-blue-700">Materi</span>
-    </div>
-
-    <!-- QR Scanner - Tombol Utama (Floating Emerald) -->
-    <div class="relative -mt-14 group cursor-pointer">
-        <div class="bg-gradient-to-tr from-emerald-600 to-teal-400 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-[0_8px_20px_rgba(5,150,105,0.4)] border-[6px] border-white active:scale-95 transition-transform">
-            <i class="fas fa-qrcode text-2xl"></i>
-        </div>
-        <span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[8px] font-black text-emerald-700 uppercase tracking-tighter">Scan</span>
-    </div>
-
-    <!-- Guru - Amber (Inklusif & Ramah) -->
-    <div class="flex flex-col items-center gap-1 group cursor-pointer">
-        <div class="text-amber-500 bg-amber-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-transform active:scale-90 text-opacity-40 group-hover:text-opacity-100 shadow-sm border border-amber-100/50">
-            <i class="fas fa-users-rectangle text-lg"></i>
-        </div>
-        <span class="text-[8px] font-black text-slate-400 uppercase tracking-tighter group-hover:text-amber-600">Guru</span>
-    </div>
-
-    <!-- Profil - Ungu (Privasi Terjaga) -->
-    <div class="flex flex-col items-center gap-1 group cursor-pointer">
-        <div class="text-purple-600 bg-purple-50 w-10 h-10 rounded-2xl flex items-center justify-center transition-transform active:scale-90 text-opacity-40 group-hover:text-opacity-100 shadow-sm border border-purple-100/50">
-            <i class="fas fa-circle-user text-lg"></i>
-        </div>
-        <span class="text-[8px] font-black text-slate-400 uppercase tracking-tighter group-hover:text-purple-700">Profil</span>
-    </div>
-
-</nav>
-
-    <!-- PWA INSTALL POPUP -->
-    <div id="pwa-popup" class="pwa-popup fixed inset-x-0 bottom-24 mx-6 z-[60]">
-        <div class="bg-slate-900 text-white p-5 rounded-[35px] shadow-2xl flex items-center gap-4">
-            <div class="bg-emerald-500 p-3 rounded-2xl shadow-lg">
-                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-8 h-8 brightness-0 invert">
-            </div>
-            <div class="flex-1">
-                <h5 class="text-[11px] font-bold">Aplikasi MI Clapar</h5>
-                <p class="text-[9px] text-slate-400">Instal di layar utama untuk akses lebih cepat.</p>
-            </div>
-            <div class="flex flex-col gap-2">
-                <button id="btn-install" class="bg-emerald-500 text-white text-[9px] font-black px-4 py-2 rounded-xl uppercase">Instal</button>
-                <button id="btn-close" class="text-[8px] text-slate-500 font-bold uppercase text-center">Nanti</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Logika Install PWA
-        let deferredPrompt;
-        const popup = document.getElementById('pwa-popup');
-        const btnInstall = document.getElementById('btn-install');
-        const btnClose = document.getElementById('btn-close');
+        const SHEET_URL = 'PASTE_URL_CSV_ANDA_DI_SINI';
 
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // Tampilkan popup setelah 4 detik
-            setTimeout(() => {
-                popup.classList.add('show');
-            }, 4000);
-        });
-
-        btnInstall.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                deferredPrompt = null;
-                popup.classList.remove('show');
-            }
-        });
-
-        btnClose.addEventListener('click', () => {
-            popup.classList.remove('show');
-        });
-
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
+        // Efek Getar Saat Klik (Khusus Android/PWA)
+        function vibrate() {
+            if (navigator.vibrate) navigator.vibrate(50);
         }
+
+        async function loadSheetData() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const data = await response.text();
+                const rows = data.split('\n').map(row => row.split(','));
+
+                // Update Stats & Teks Berjalan
+                document.getElementById('stat-hadir').innerText = rows[1][0] + '%';
+                document.getElementById('stat-infaq').innerText = 'Rp ' + rows[1][1];
+                document.getElementById('marquee-data').innerText = "Warta Madani: " + rows[1][2] + " • " + rows[1][3];
+
+                // Update Agenda dengan Animasi
+                let agendaHtml = '';
+                for(let i = 2; i < rows.length; i++) {
+                    if(rows[i][0]) {
+                        agendaHtml += `
+                        <div class="bg-white p-5 rounded-[30px] border border-slate-100 shadow-sm flex items-center gap-5 animate__animated animate__fadeInUp">
+                            <div class="bg-emerald-600 text-white w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-bold shadow-lg">
+                                <span class="text-sm">${rows[i][0]}</span>
+                                <span class="text-[8px] uppercase">${rows[i][1]}</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-xs font-black text-slate-800">${rows[i][2]}</p>
+                                <p class="text-[10px] text-slate-400 mt-1">${rows[i][3]}</p>
+                            </div>
+                        </div>`;
+                    }
+                }
+                document.getElementById('container-agenda').innerHTML = agendaHtml;
+            } catch (e) {
+                console.log("Offline mode atau Gagal ambil data");
+            }
+        }
+
+        loadSheetData();
     </script>
 </body>
 </html>
