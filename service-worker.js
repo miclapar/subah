@@ -1,9 +1,27 @@
-self.addEventListener('install', (e) => {
-      e.waitUntil(caches.open('v1').then((cache) => cache.addAll(['index.html'])));
-    });
-    self.addEventListener('fetch', (e) => {
-      e.respondWith(caches.match(e.request).then((res) => res || fetch(e.request)));
-    });
-    ```
+const CACHE_NAME = 'mi-clapar-fast-v2';
+const assets = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  'https://cdn.tailwindcss.com',
+  'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css'
+];
 
-**Selesai!** Sekarang website Anda sudah memiliki fitur lengkap: Portal informasi, Agenda terbaru, dan Aplikasi Mobile yang bisa diinstal orang tua.
+self.addEventListener('install', (e) => {
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(assets)));
+});
+
+self.addEventListener('fetch', (event) => {
+  // Strategi: Buka yang ada di Cache dulu agar Instan
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(event.request).then((networkResponse) => {
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+        });
+        return networkResponse;
+      });
+      return cachedResponse || fetchPromise;
+    })
+  );
+});
