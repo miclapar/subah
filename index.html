@@ -102,25 +102,42 @@
         </div>
     </section>
 
-    <!-- MENU UTAMA -->
-    <main class="max-w-4xl mx-auto px-6 -mt-8 relative z-20">
-        <div class="grid grid-cols-4 gap-4 mb-10">
-            <!-- Tombol-tombol ini akan memiliki efek animasi saat ditekan -->
-            <div class="card-pop space-y-2 text-center group cursor-pointer" onclick="vibrate()">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50"><i class="fas fa-calendar-check text-xl"></i></div>
-                <span class="text-[9px] font-bold text-slate-500 uppercase">Absensi</span>
-            </div>
-            <div class="card-pop space-y-2 text-center group cursor-pointer">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-blue-600 border border-blue-50"><i class="fas fa-file-signature text-xl"></i></div>
-                <span class="text-[9px] font-bold text-slate-500 uppercase">Nilai</span>
-            </div>
-            <div class="card-pop space-y-2 text-center group cursor-pointer">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-amber-500 border border-amber-50"><i class="fas fa-bullhorn text-xl"></i></div>
-                <span class="text-[9px] font-bold text-slate-500 uppercase">Info</span>
-            </div>
-            <div class="card-pop space-y-2 text-center group cursor-pointer">
-                <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-purple-600 border border-purple-50"><i class="fas fa-hand-holding-heart text-xl"></i></div>
-                <span class="text-[9px] font-bold text-slate-500 uppercase">Infaq</span>
+    <!-- QUICK MENU DENGAN IDENTITAS WARNA BERBEDA -->
+<div class="grid grid-cols-4 gap-4 mb-10 text-center">
+    
+    <!-- Absensi - Emerald -->
+    <div onclick="openLink('absensi')" class="card-pop space-y-2 group cursor-pointer">
+        <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50 group-active:bg-emerald-500 group-active:text-white transition-all duration-300">
+            <i class="fas fa-calendar-check text-xl"></i>
+        </div>
+        <span class="text-[9px] font-black text-emerald-800 uppercase tracking-tighter">Absensi</span>
+    </div>
+
+    <!-- Nilai - Blue -->
+    <div onclick="openLink('nilai')" class="card-pop space-y-2 group cursor-pointer">
+        <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-blue-600 border border-blue-50 group-active:bg-blue-500 group-active:text-white transition-all duration-300">
+            <i class="fas fa-file-signature text-xl"></i>
+        </div>
+        <span class="text-[9px] font-black text-blue-800 uppercase tracking-tighter">Nilai</span>
+    </div>
+
+    <!-- Info - Amber -->
+    <div onclick="openLink('info')" class="card-pop space-y-2 group cursor-pointer">
+        <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-amber-500 border border-amber-50 group-active:bg-amber-500 group-active:text-white transition-all duration-300">
+            <i class="fas fa-bullhorn text-xl"></i>
+        </div>
+        <span class="text-[9px] font-black text-amber-700 uppercase tracking-tighter">Info</span>
+    </div>
+
+    <!-- Infaq - Purple -->
+    <div onclick="openLink('infaq')" class="card-pop space-y-2 group cursor-pointer">
+        <div class="bg-white aspect-square rounded-[25px] shadow-lg flex items-center justify-center text-purple-600 border border-purple-50 group-active:bg-purple-500 group-active:text-white transition-all duration-300">
+            <i class="fas fa-hand-holding-heart text-xl"></i>
+        </div>
+        <span class="text-[9px] font-black text-purple-800 uppercase tracking-tighter">Infaq</span>
+    </div>
+
+</div>
                 <!-- AKTIVITAS MADRASAH (FOTO KEGIATAN) -->
         <section class="mb-10 animate__animated animate__fadeIn">
             <div class="flex justify-between items-end mb-4 px-2">
