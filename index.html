@@ -215,6 +215,13 @@
         }
 
         init();
+        if ('service-worker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker aktif!'))
+            .catch(err => console.log('SW Gagal:', err));
+    });
+}
     </script>
 </body>
 </html>
