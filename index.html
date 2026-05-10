@@ -59,17 +59,16 @@
             <span class="text-[10px] font-black text-white bg-emerald-500 px-3 py-1 rounded-full shadow-sm animate-pulse">LIVE UPDATE</span>
         </div>
         <div class="grid grid-cols-2 gap-4">
-            <div class="bg-emerald-50/70 p-5 rounded-[28px] border border-emerald-100 text-center relative overflow-hidden">
-                <p class="text-[10px] text-emerald-700 font-extrabold uppercase mb-2 tracking-widest">Kehadiran</p>
-                <p id="absen-val" class="text-3xl font-black text-slate-800 leading-none tracking-tighter">--%</p>
-                <i class="fas fa-check-circle absolute -right-2 -bottom-2 text-emerald-200/40 text-4xl"></i>
-            </div>
-            <div class="bg-emerald-50/70 p-5 rounded-[28px] border border-emerald-100 text-center relative overflow-hidden">
-                <p class="text-[10px] text-emerald-700 font-extrabold uppercase mb-2 tracking-widest">Hafalan</p>
-                <p id="hafalan-val" class="text-sm font-black text-slate-800 leading-tight">...</p>
-                <i class="fas fa-star absolute -right-2 -bottom-2 text-emerald-200/40 text-4xl"></i>
-            </div>
-        </div>
+            <div class="bg-white rounded-[35px] p-6 shadow-sm border border-slate-100 mb-10">
+    <div class="flex items-center justify-between mb-4 px-1">
+        <h4 class="font-extrabold text-slate-800 text-sm uppercase tracking-wider flex items-center gap-2">
+            <i class="fas fa-calendar-check text-emerald-500"></i> Agenda Terdekat
+        </h4>
+        <span class="text-[10px] font-bold text-slate-400">Scroll untuk lainnya</span>
+    </div>
+    
+    <div id="agenda-list" class="space-y-1.5 max-h-[320px] overflow-y-auto pr-1">
+        <p class="text-[11px] text-slate-400 animate-pulse text-center py-4">Menyiapkan jadwal...</p>
     </div>
 </div>
     </section>
@@ -169,22 +168,26 @@
                 // Agenda Promosi (Link Terbaru)
                 const agendaRows = agenda.split('\n').slice(1);
                 let aHtml = "";
-                agendaRows.forEach(row => {
-                    const c = row.split(',');
-                    if(c[1]) {
-                        aHtml += `
-                            <div class="flex items-center gap-4 bg-white/5 p-4 rounded-3xl border border-white/10">
-                                <div class="bg-emerald-500 text-white font-black p-2 rounded-xl text-center min-w-[50px]">
-                                    <span class="text-[10px] block leading-none">${c[0]}</span>
-                                </div>
-                                <div>
-                                    <h5 class="text-white text-xs font-bold leading-tight">${c[1]}</h5>
-                                    <p class="text-[9px] text-emerald-400 mt-1 uppercase font-bold tracking-widest">${c[2] || 'Segera'}</p>
-                                </div>
-                            </div>`;
-                    }
-                });
-                document.getElementById('agenda-list').innerHTML = aHtml || "Belum ada agenda.";
+               // Bagian looping data agenda di dalam script
+const agendaRows = agenda.split('\n').slice(1);
+let aHtml = "";
+
+agendaRows.forEach(row => {
+    const c = row.split(',');
+    if(c[1] && c[1].trim() !== "") { 
+        aHtml += `
+            <div class="flex items-center gap-3 bg-emerald-50/40 p-2.5 rounded-2xl border border-emerald-100/50">
+                <div class="bg-white border border-emerald-200 text-emerald-700 font-black px-2 py-1 rounded-xl text-[10px] min-w-[50px] text-center shadow-sm">
+                    ${c[0]}
+                </div>
+                <div class="flex-1">
+                    <h5 class="text-slate-700 text-[11px] font-extrabold leading-none">${c[1]}</h5>
+                    <p class="text-[10px] text-slate-500 mt-1 font-medium italic">${c[2] || 'Kegiatan Madrasah'}</p>
+                </div>
+            </div>`;
+    }
+});
+document.getElementById('agenda-list').innerHTML = aHtml || "<p class='text-[11px] text-center text-slate-400'>Belum ada agenda.</p>";
 
             } catch (e) { console.error("Error data"); }
         }
