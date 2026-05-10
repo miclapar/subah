@@ -14,14 +14,19 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
         .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
         .hero-bg { background: linear-gradient(rgba(6, 95, 70, 0.8), rgba(5, 150, 105, 0.9)), url('https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; }
+        
+        /* Marquee Info */
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; }
+        .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; white-space: nowrap; }
+        
+        /* Marquee Galeri */
         @keyframes scroll-gallery { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .animate-scroll { display: flex; width: max-content; animation: scroll-gallery 30s linear infinite; }
-        .gallery-item { flex-shrink: 0; width: 160px; height: 100px; margin-right: 12px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .gallery-item { flex-shrink: 0; width: 160px; height: 100px; margin-right: 12px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: #eee; }
+        
         .pulse-btn { animation: pulse-green 2s infinite; }
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
         .nav-item.active { color: #10b981; }
@@ -30,9 +35,9 @@
 <body>
 
     <section class="hero-bg pb-24 pt-8 px-6 rounded-b-[50px] shadow-2xl relative overflow-hidden">
-        <div class="max-w-4xl mx-auto mb-6 overflow-hidden whitespace-nowrap bg-white/10 backdrop-blur-sm border border-white/20 rounded-full py-2 px-4 relative z-10">
-            <div id="marquee-info" class="inline-block animate-marquee text-[10px] font-bold text-emerald-100 tracking-wider uppercase">
-                Memuat informasi terbaru...
+        <div class="max-w-4xl mx-auto mb-6 overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 rounded-full py-2 px-4 relative z-10">
+            <div id="marquee-info" class="animate-marquee text-[10px] font-bold text-emerald-100 tracking-wider uppercase">
+                Menghubungkan ke server madrasah...
             </div>
         </div>
 
@@ -59,7 +64,7 @@
                     <img src="https://ui-avatars.com/api/?name=Siswa+MI&background=059669&color=fff" class="w-14 h-14 rounded-2xl border-2 border-emerald-500">
                     <div>
                         <h4 class="font-bold text-slate-800">Halo, Orang Tua Siswa</h4>
-                        <p class="text-xs text-slate-500 italic">Pantau perkembangan ananda setiap hari</p>
+                        <p class="text-xs text-slate-500 italic">Data terupdate dari Google Sheets</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
@@ -76,33 +81,47 @@
         </div>
     </section>
 
-    <main class="max-w-4xl mx-auto px-6 -mt-10 relative z-20 pb-20">
+    <main class="max-w-4xl mx-auto px-6 -mt-10 relative z-20 pb-28">
         <div class="grid grid-cols-4 gap-4 mb-8">
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50"><i class="fas fa-calendar-check text-xl"></i></div><span class="text-[10px] font-bold mt-2">Absen</span></div>
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-blue-600 border border-blue-50"><i class="fas fa-file-invoice text-xl"></i></div><span class="text-[10px] font-bold mt-2">Nilai</span></div>
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-amber-500 border border-amber-50"><i class="fas fa-bullhorn text-xl"></i></div><span class="text-[10px] font-bold mt-2">Info</span></div>
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-purple-600 border border-purple-50"><i class="fas fa-hand-holding-heart text-xl"></i></div><span class="text-[10px] font-bold mt-2">Donasi</span></div>
+            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50 active:scale-90 transition"><i class="fas fa-calendar-check text-xl"></i></div><span class="text-[10px] font-bold mt-2">Absen</span></div>
+            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-blue-600 border border-blue-50 active:scale-90 transition"><i class="fas fa-file-invoice text-xl"></i></div><span class="text-[10px] font-bold mt-2">Nilai</span></div>
+            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-amber-500 border border-amber-50 active:scale-90 transition"><i class="fas fa-bullhorn text-xl"></i></div><span class="text-[10px] font-bold mt-2">Info</span></div>
+            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-purple-600 border border-purple-50 active:scale-90 transition"><i class="fas fa-hand-holding-heart text-xl"></i></div><span class="text-[10px] font-bold mt-2">Donasi</span></div>
         </div>
 
-        <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2">
+        <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2 px-2">
             <i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan Madrasah
         </h3>
 
-        <div class="gallery-container overflow-hidden mb-8 relative">
+        <div class="gallery-container overflow-hidden mb-8 relative rounded-2xl">
             <div id="gallery-wrapper" class="animate-scroll">
                 </div>
         </div>
     </main>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 px-6 py-3 flex justify-between items-center z-50 rounded-t-[30px]">
-        <button class="nav-item active flex flex-col items-center"><i class="fas fa-home text-xl"></i><span class="text-[9px] font-bold">HOME</span></button>
-        <button class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-book-open text-xl"></i><span class="text-[9px] font-bold">MATERI</span></button>
-        <div class="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg -mt-12 border-[6px] border-[#f8fafc] pulse-btn"><i class="fas fa-qrcode text-xl"></i></div>
-        <button class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-users text-xl"></i><span class="text-[9px] font-bold">WALI</span></button>
-        <button class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-user-circle text-xl"></i><span class="text-[9px] font-bold">PROFIL</span></button>
+    <div id="pwa-popup" class="fixed bottom-24 left-4 right-4 z-[100] hidden">
+        <div class="bg-slate-900/95 backdrop-blur-lg text-white p-5 rounded-[30px] shadow-2xl flex items-center justify-between border border-white/10 animate__animated animate__bounceInUp">
+            <div class="flex items-center gap-3">
+                <img src="https://ik.imagekit.io/qusnzijssq/logo%20miclapar.png" class="w-10 h-10 bg-white p-1 rounded-xl">
+                <div>
+                    <h5 class="text-sm font-bold">Instal Aplikasi</h5>
+                    <p class="text-[10px] text-emerald-400">Akses cepat di layar utama</p>
+                </div>
+            </div>
+            <button id="pwa-install" class="bg-emerald-500 px-4 py-2 rounded-xl text-xs font-bold active:scale-95">INSTALL</button>
+        </div>
+    </div>
+
+    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 px-6 py-3 flex justify-between items-center z-50 rounded-t-[30px] shadow-lg">
+        <button onclick="changeMenu(this)" class="nav-item active flex flex-col items-center"><i class="fas fa-home text-xl"></i><span class="text-[9px] font-bold mt-1">HOME</span></button>
+        <button onclick="changeMenu(this)" class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-book-open text-xl"></i><span class="text-[9px] font-bold mt-1">MATERI</span></button>
+        <div class="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg -mt-12 border-[6px] border-[#f8fafc] pulse-btn active:scale-90 transition cursor-pointer"><i class="fas fa-qrcode text-xl"></i></div>
+        <button onclick="changeMenu(this)" class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-users text-xl"></i><span class="text-[9px] font-bold mt-1">WALI</span></button>
+        <button onclick="changeMenu(this)" class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-user-circle text-xl"></i><span class="text-[9px] font-bold mt-1">PROFIL</span></button>
     </div>
 
     <script>
+        // CONFIG & DATA
         const SHEETS_INFO = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=942260017&single=true&output=csv';
         const SHEETS_AKADEMIK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1892437284&single=true&output=csv';
         const SHEETS_GALERI = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1377707417&single=true&output=csv';
@@ -114,39 +133,65 @@
                     fetch(SHEETS_AKADEMIK).then(r => r.text()),
                     fetch(SHEETS_GALERI).then(r => r.text())
                 ]);
-                
                 renderInfo(info);
                 renderAkademik(akad);
                 renderGaleri(gale);
-            } catch (e) { console.error("Gagal sinkron data"); }
+            } catch (e) { console.error("Error data:", e); }
         }
 
         function renderInfo(csv) {
             const rows = csv.split('\n').slice(1);
-            let text = rows.filter(r => r.includes('Aktif')).map(r => r.split(',')[2]).join(' • ');
-            document.getElementById('marquee-info').innerHTML = text || "Selamat Datang di MI Clapar Digital";
+            let combinedText = rows.filter(r => r.includes('Aktif')).map(r => r.split(',')[2]).join(' • ');
+            document.getElementById('marquee-info').innerHTML = combinedText || "Selamat Datang di MI Clapar Digital";
         }
 
         function renderAkademik(csv) {
-            const firstData = csv.split('\n')[1]?.split(',');
-            if(firstData) {
-                document.getElementById('absen-val').innerText = (firstData[3] || '98') + '%';
-                document.getElementById('hafalan-val').innerHTML = `${firstData[4]} <span class="text-[10px] block font-normal text-blue-400">(${firstData[5]})</span>`;
+            const data = csv.split('\n')[1]?.split(',');
+            if(data) {
+                document.getElementById('absen-val').innerText = (data[3] || '98') + '%';
+                document.getElementById('hafalan-val').innerHTML = `${data[4]} <span class="text-[10px] block font-normal text-blue-400">(${data[5]})</span>`;
             }
         }
 
         function renderGaleri(csv) {
             const rows = csv.split('\n').slice(1);
             const wrapper = document.getElementById('gallery-wrapper');
-            let html = rows.map(r => {
+            let items = rows.map(r => {
                 const url = r.split(',')[3]?.trim();
-                return url ? `<div class="gallery-item"><img src="${url}" class="w-full h-full object-cover"></div>` : '';
+                return url ? `<div class="gallery-item"><img src="${url}" class="w-full h-full object-cover" loading="lazy"></div>` : '';
             }).join('');
-            wrapper.innerHTML = html + html; // Double for seamless loop
+            wrapper.innerHTML = items + items; // Loop seamless
+        }
+
+        // PWA LOGIC
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            setTimeout(() => document.getElementById('pwa-popup').classList.remove('hidden'), 3000);
+        });
+
+        document.getElementById('pwa-install').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt = null;
+                document.getElementById('pwa-popup').classList.add('hidden');
+            }
+        });
+
+        // UI LOGIC
+        function changeMenu(btn) {
+            document.querySelectorAll('.nav-item').forEach(i => {
+                i.classList.remove('active');
+                i.classList.add('text-slate-400');
+            });
+            btn.classList.add('active');
+            btn.classList.remove('text-slate-400');
+            if(navigator.vibrate) navigator.vibrate(30);
         }
 
         function requestNotificationPermission() {
-            Notification.requestPermission().then(p => { if(p==='granted') new Notification("MI Clapar Digital", {body: "Notifikasi aktif!"}); });
+            Notification.requestPermission().then(p => { if(p==='granted') new Notification("MI Clapar Digital", {body: "Notifikasi Aktif!"}); });
         }
 
         initApp();
