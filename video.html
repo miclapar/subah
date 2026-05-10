@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { font-family: 'sans-serif'; -webkit-tap-highlight-color: transparent; }
-        /* Menghaluskan baris teks judul */
         .line-clamp-2 {
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -32,36 +31,37 @@
     <div id="video-grid" class="grid grid-cols-3 gap-2 p-2">
         <div class="col-span-3 py-32 text-center" id="loading">
             <i class="fas fa-circle-notch fa-spin text-emerald-500 text-2xl mb-3"></i>
-            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Membuka Arsip Video...</p>
+            <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Membuka Galeri...</p>
         </div>
     </div>
 
-    <div id="end-of-content" class="py-10 text-center hidden">
-        <p class="text-[9px] text-slate-300 font-bold uppercase tracking-widest">Semua video telah dimuat</p>
-    </div>
-
     <script>
-        // MASUKKAN LINK CSV GOOGLE SHEETS BAPAK DISINI
-        const SHEET_URL = "URL_CSV_GOOGLE_SHEET_BAPAK_DI_SINI";
+        // Link CSV yang Bapak berikan
+        const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1181413974&single=true&output=csv";
 
         async function muatVideo() {
             try {
                 const response = await fetch(SHEET_URL);
                 const data = await response.text();
-                // Ambil semua baris, lewati baris pertama (header)
+                // Memecah baris CSV (lewati baris header)
                 const rows = data.split('\n').slice(1);
                 
                 let html = "";
                 rows.forEach(row => {
-                    // Gunakan regex untuk memisahkan koma agar aman jika ada koma di dalam judul
+                    // Regex untuk memisahkan koma dengan aman
                     const c = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/); 
                     
-                    const url = c[4]?.replace(/"/g, '').trim(); // Kolom E
-                    const judul = c[1]?.replace(/"/g, '').trim(); // Kolom B
+                    const judul = c[1]?.replace(/"/g, '').trim(); // Judul di kolom B
+                    const url = c[4]?.replace(/"/g, '').trim();   // Link YouTube di kolom E
 
                     if (url && url.includes('http')) {
-                        // Ekstrak ID Video YouTube
-                        const videoID = url.split('v=')[1]?.split('&')[0] || url.split('/').pop();
+                        // Mengambil ID Video YouTube (support format watch?v= atau youtu.be/)
+                        let videoID = "";
+                        if(url.includes('v=')) {
+                            videoID = url.split('v=')[1].split('&')[0];
+                        } else {
+                            videoID = url.split('/').pop();
+                        }
                         
                         html += `
                         <div class="bg-white rounded-xl overflow-hidden border border-slate-100 shadow-sm active:scale-95 transition-transform duration-200" 
@@ -71,29 +71,32 @@
                                      class="w-full h-full object-cover" 
                                      loading="lazy">
                                 <div class="absolute inset-0 flex items-center justify-center bg-black/5">
-                                    <div class="w-7 h-7 bg-white/80 rounded-full flex items-center justify-center shadow">
+                                    <div class="w-7 h-7 bg-white/90 rounded-full flex items-center justify-center shadow">
                                         <i class="fas fa-play text-red-600 text-[10px] ml-0.5"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-1.5 bg-white">
-                                <p class="text-[8px] font-bold text-slate-600 line-clamp-2 leading-tight uppercase text-center">${judul || 'Video Kegiatan'}</p>
+                            <div class="p-1.5 bg-white text-center">
+                                <p class="text-[8px] font-bold text-slate-600 line-clamp-2 leading-tight uppercase">${judul || 'Video MI Clapar'}</p>
                             </div>
                         </div>`;
                     }
                 });
 
                 const grid = document.getElementById('video-grid');
-                grid.innerHTML = html || "<p class='col-span-3 text-center py-20 text-xs text-slate-400'>Belum ada video tersedia.</p>";
-                document.getElementById('end-of-content').classList.remove('hidden');
+                if (html === "") {
+                    grid.innerHTML = "<p class='col-span-3 text-center py-20 text-[10px] text-slate-400 font-bold uppercase'>Belum ada video di daftar.</p>";
+                } else {
+                    grid.innerHTML = html;
+                }
 
             } catch (error) {
                 console.error("Error:", error);
-                document.getElementById('video-grid').innerHTML = "<p class='col-span-3 text-center py-20 text-red-500 text-[10px]'>Gagal memuat data. Periksa koneksi internet.</p>";
+                document.getElementById('video-grid').innerHTML = "<p class='col-span-3 text-center py-20 text-red-500 text-[10px] uppercase font-bold'>Gagal mengambil data Sheet.</p>";
             }
         }
 
-        // Jalankan fungsi
+        // Jalankan fungsi otomatis
         muatVideo();
     </script>
 </body>
