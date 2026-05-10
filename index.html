@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#059669">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2942/2942503.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MI Clapar Digital | Portal Orang Tua & Guru</title>
@@ -147,7 +150,21 @@
             </div>
         </div>
     </main>
-
+<!-- Popup Install PWA -->
+<div id="pwa-popup" class="fixed bottom-24 left-4 right-4 bg-slate-900 text-white p-5 rounded-[28px] shadow-2xl flex items-center justify-between transform translate-y-40 transition-transform duration-500 z-[100] hidden">
+    <div class="flex items-center gap-3">
+        <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-10 h-10">
+        <div>
+            <h5 class="text-sm font-bold">MI Clapar Digital</h5>
+            <p class="text-[10px] text-slate-400">Pasang di layar utama Anda</p>
+        </div>
+    </div>
+    <div class="flex gap-2">
+        <button id="pwa-later" class="px-3 py-2 text-xs font-bold text-slate-400">Nanti</button>
+        <button id="pwa-install" class="bg-emerald-500 px-4 py-2 rounded-xl text-xs font-bold shadow-lg">Install</button>
+    </div>
+</div>
+    
     <!-- Bottom Navigation Bar (Ala Aplikasi Mobile) -->
     <div class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg border-t border-slate-100 px-8 py-3 flex justify-between items-center z-50">
         <i class="fas fa-home text-emerald-600 text-xl"></i>
@@ -158,6 +175,64 @@
         <i class="fas fa-users text-slate-400 text-xl"></i>
         <i class="fas fa-cog text-slate-400 text-xl"></i>
     </div>
+<script>
+  let deferredPrompt;
+  const pwaPopup = document.getElementById('pwa-popup');
+  const btnInstall = document.getElementById('pwa-install');
+  const btnLater = document.getElementById('pwa-later');
 
+  // 1. Registrasi Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(() => {
+      console.log('SW Registered');
+    });
+  }
+
+  // 2. Tangkap event install dari browser
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Cegah Chrome memunculkan banner default
+    e.preventDefault();
+    // Simpan event agar bisa dipicu nanti
+    deferredPrompt = e;
+    
+    // Munculkan popup buatan kita setelah 3 detik
+    setTimeout(() => {
+      pwaPopup.classList.remove('hidden');
+      pwaPopup.classList.remove('translate-y-40');
+      pwaPopup.classList.add('translate-y-0');
+    }, 3000);
+  });
+
+  // 3. Logika ketika tombol Install diklik
+  btnInstall.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log(`User response to install: ${outcome}`);
+      deferredPrompt = null;
+      hidePopup();
+    }
+  });
+
+  // 4. Logika ketika tombol Nanti diklik
+  btnLater.addEventListener('click', () => {
+    hidePopup();
+  });
+
+  function hidePopup() {
+    pwaPopup.classList.add('translate-y-40');
+    setTimeout(() => pwaPopup.classList.add('hidden'), 500);
+  }
+
+  // Logika Tambahan: Aktifkan Menu Navigasi Bawah
+  function setActive(element) {
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.remove('text-emerald-600', 'active');
+      item.classList.add('text-slate-400');
+    });
+    element.classList.add('text-emerald-600', 'active');
+    element.classList.remove('text-slate-400');
+  }
+</script>
 </body>
 </html>
