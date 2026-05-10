@@ -37,6 +37,7 @@
         #agenda-list::-webkit-scrollbar { width: 4px; }
         #agenda-list::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
     </style>
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
 </head>
 <body>
 
@@ -125,12 +126,31 @@
     </div>
 
     <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-2xl border-t border-slate-200 px-6 py-4 flex justify-between items-center z-50 rounded-t-[45px] shadow-2xl">
-        <button onclick="changeMenu(this, 'home')" data-menu="home" class="nav-item active flex flex-col items-center"><i class="fas fa-house-user text-xl"></i><span class="text-[9px] font-black mt-1 uppercase">Beranda</span></button>
-        <button onclick="changeMenu(this, 'materi')" data-menu="materi" class="nav-item flex flex-col items-center"><i class="fas fa-graduation-cap text-xl"></i><span class="text-[9px] font-black mt-1 uppercase">Materi</span></button>
-        <div onclick="triggerVibrate(80); alert('Scan Absensi')" class="bg-emerald-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl -mt-16 border-[8px] border-slate-100 pulse-btn active:scale-90 transition cursor-pointer"><i class="fas fa-qrcode text-2xl"></i></div>
-        <button onclick="changeMenu(this, 'wali')" data-menu="wali" class="nav-item flex flex-col items-center"><i class="fas fa-hand-holding-heart text-xl"></i><span class="text-[9px] font-black mt-1 uppercase">Layanan</span></button>
-        <button onclick="changeMenu(this, 'profil')" data-menu="profil" class="nav-item flex flex-col items-center"><i class="fas fa-user-shield text-xl"></i><span class="text-[9px] font-black mt-1 uppercase">Profil</span></button>
+    <button onclick="changeMenu(this, 'home')" data-menu="home" class="nav-item active flex flex-col items-center">
+        <i class="fas fa-house-user text-xl"></i>
+        <span class="text-[9px] font-black mt-1 uppercase">Beranda</span>
+    </button>
+    
+    <button onclick="changeMenu(this, 'materi')" data-menu="materi" class="nav-item flex flex-col items-center">
+        <i class="fas fa-graduation-cap text-xl"></i>
+        <span class="text-[9px] font-black mt-1 uppercase">Materi</span>
+    </button>
+
+    <!-- TOMBOL SCAN YANG SUDAH BERFUNGSI -->
+    <div id="start-scan" class="bg-emerald-600 w-16 h-16 rounded-full flex items-center justify-center text-white shadow-2xl -mt-16 border-[8px] border-slate-100 pulse-btn active:scale-90 transition cursor-pointer z-[60]">
+        <i class="fas fa-qrcode text-2xl"></i>
     </div>
+
+    <button onclick="changeMenu(this, 'wali')" data-menu="wali" class="nav-item flex flex-col items-center">
+        <i class="fas fa-hand-holding-heart text-xl"></i>
+        <span class="text-[9px] font-black mt-1 uppercase">Layanan</span>
+    </button>
+    
+    <button onclick="changeMenu(this, 'profil')" data-menu="profil" class="nav-item flex flex-col items-center">
+        <i class="fas fa-user-shield text-xl"></i>
+        <span class="text-[9px] font-black mt-1 uppercase">Profil</span>
+    </button>
+</div>
 
     <script>
         const API = {
@@ -222,6 +242,60 @@
             .catch(err => console.log('SW Gagal:', err));
     });
 }
+        let html5QrCode;
+
+// Hubungkan tombol start-scan dengan fungsi kamera
+document.getElementById('start-scan').addEventListener('click', async () => {
+    if(navigator.vibrate) navigator.vibrate(80);
+    
+    const modal = document.getElementById('scanner-modal');
+    modal.classList.remove('hidden');
+    
+    html5QrCode = new Html5Qrcode("reader");
+    
+    try {
+        await html5QrCode.start(
+            { facingMode: "environment" }, 
+            { fps: 20, qrbox: { width: 250, height: 250 } },
+            (decodedText) => {
+                if(navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                stopScanner();
+                
+                // Eksekusi hasil scan
+                alert("Scan Berhasil: " + decodedText);
+                if(decodedText.startsWith("http")) window.location.href = decodedText;
+            }
+        );
+    } catch (err) {
+        alert("Kamera error. Gunakan HTTPS dan beri izin akses kamera.");
+        stopScanner();
+    }
+});
+
+function stopScanner() {
+    if (html5QrCode && html5QrCode.isScanning) {
+        html5QrCode.stop().then(() => {
+            document.getElementById('scanner-modal').classList.add('hidden');
+        });
+    } else {
+        document.getElementById('scanner-modal').classList.add('hidden');
+    }
+}
+
+document.getElementById('close-scan').addEventListener('click', stopScanner);
     </script>
+    <div id="scanner-modal" class="fixed inset-0 z-[100] bg-black/90 hidden flex flex-col items-center justify-center">
+    <div class="relative w-[75%] max-w-[350px] aspect-square border-2 border-emerald-500 rounded-3xl overflow-hidden shadow-[0_0_30px_rgba(16,185,129,0.4)]">
+        <div id="reader" class="w-full h-full"></div>
+        <div class="absolute top-0 left-0 w-full h-1 bg-emerald-500 shadow-[0_0_15px_#10b981] animate-scan-line"></div>
+    </div>
+    <button id="close-scan" class="mt-12 bg-white/10 px-10 py-3 rounded-full text-white text-xs font-bold border border-white/20">BATALKAN</button>
+</div>
+
+<style>
+    @keyframes scan-line { 0%, 100% { top: 0%; } 50% { top: 100%; } }
+    .animate-scan-line { position: absolute; animation: scan-line 2s infinite linear; }
+    #reader video { object-fit: cover !important; }
+</style>
 </body>
 </html>
