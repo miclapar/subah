@@ -53,6 +53,34 @@
         animation: fadeInUp 0.8s ease-out; 
     }
 </style>
+    <style>
+    /* Animasi Marquee Galeri */
+    @keyframes scroll-gallery {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); } /* Geser setengah karena konten diduplikasi */
+    }
+
+    .animate-scroll {
+        display: flex;
+        width: max-content; /* Memastikan container selebar jumlah gambar */
+        animation: scroll-gallery 30s linear infinite;
+    }
+
+    /* Berhenti saat disentuh agar wali murid bisa melihat foto */
+    .gallery-container:active .animate-scroll {
+        animation-play-state: paused;
+    }
+
+    .gallery-item {
+        flex-shrink: 0;
+        width: 160px; /* Lebar foto tetap rapi */
+        height: 100px;
+        margin-right: 12px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+</style>
 </head>
 <body>
 
@@ -141,26 +169,46 @@
             </div>
         </div>
 
-        <!-- GALERI PROMOSI (Visual) -->
-        <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2">
-            <i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan Madrasah
-        </h3>
-        <div class="grid grid-cols-2 gap-3 mb-8">
-            <div class="relative h-40 rounded-[30px] overflow-hidden shadow-md">
-                <img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover">
-                <div class="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/70 to-transparent">
-                    <p class="text-white text-[10px] font-bold">Ekstrakurikuler</p>
-                </div>
-            </div>
-            <div class="grid grid-rows-2 gap-3">
-                <div class="relative rounded-[20px] overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover">
-                </div>
-                <div class="relative rounded-[20px] overflow-hidden shadow-md">
-                    <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" class="w-full h-full object-cover">
-                </div>
-            </div>
+        <!-- GALERI KEGIATAN BERGERAK -->
+<h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2 px-6">
+    <i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan Madrasah
+</h3>
+
+<div class="gallery-container overflow-hidden mb-8 relative">
+    <!-- Gradient Fade (Opsional: agar sisi kiri kanan halus) -->
+    <div class="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f8fafc] to-transparent z-10"></div>
+    <div class="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#f8fafc] to-transparent z-10"></div>
+
+    <div class="animate-scroll">
+        <!-- SET PERTAMA -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
         </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+
+        <!-- SET KEDUA (Duplikat untuk efek tanpa henti) -->
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+        <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+        </div>
+    </div>
+</div>
 
         <!-- INFO PENTING (Info Orang Tua) -->
         <div class="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100">
