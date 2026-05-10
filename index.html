@@ -19,6 +19,24 @@
             background-size: cover; background-position: center;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+    /* Animasi Custom */
+    @keyframes pulse-green {
+        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+        70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+    .pulse-btn { animation: pulse-green 2s infinite; }
+    
+    .nav-item { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .nav-item:active { transform: scale(0.8); }
+    
+    .glass-card { 
+        transition: transform 0.3s ease;
+        animation: fadeInUp 0.8s ease-out; 
+    }
+</style>
 </head>
 <body>
 
@@ -150,18 +168,22 @@
             </div>
         </div>
     </main>
-<!-- Popup Install PWA -->
-<div id="pwa-popup" class="fixed bottom-24 left-4 right-4 bg-slate-900 text-white p-5 rounded-[28px] shadow-2xl flex items-center justify-between transform translate-y-40 transition-transform duration-500 z-[100] hidden">
-    <div class="flex items-center gap-3">
-        <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-10 h-10">
-        <div>
-            <h5 class="text-sm font-bold">MI Clapar Digital</h5>
-            <p class="text-[10px] text-slate-400">Pasang di layar utama Anda</p>
+<!-- Popup PWA -->
+<div id="pwa-popup" class="fixed bottom-28 left-4 right-4 z-[100] hidden">
+    <div class="bg-slate-900/95 backdrop-blur-lg text-white p-5 rounded-[30px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between border border-white/10 animate__animated animate__bounceInUp">
+        <div class="flex items-center gap-3">
+            <div class="bg-white p-1.5 rounded-2xl">
+                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-10 h-10">
+            </div>
+            <div>
+                <h5 class="text-sm font-bold">MI Clapar Digital</h5>
+                <p class="text-[10px] text-emerald-400 font-medium">Instal untuk akses instan!</p>
+            </div>
         </div>
-    </div>
-    <div class="flex gap-2">
-        <button id="pwa-later" class="px-3 py-2 text-xs font-bold text-slate-400">Nanti</button>
-        <button id="pwa-install" class="bg-emerald-500 px-4 py-2 rounded-xl text-xs font-bold shadow-lg">Install</button>
+        <div class="flex flex-col gap-1">
+            <button id="pwa-install" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-xl text-xs font-extrabold transition-all active:scale-95 shadow-lg shadow-emerald-500/20">INSTALL</button>
+            <button id="pwa-later" class="text-[10px] font-bold text-slate-400 py-1 uppercase tracking-tighter">Nanti saja</button>
+        </div>
     </div>
 </div>
     
@@ -225,14 +247,39 @@
   }
 
   // Logika Tambahan: Aktifkan Menu Navigasi Bawah
-  function setActive(element) {
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.classList.remove('text-emerald-600', 'active');
-      item.classList.add('text-slate-400');
+      function setActive(element) {
+        // Hapus status aktif dari semua
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('text-emerald-600', 'active', 'animate__animated', 'animate__pulse');
+            item.classList.add('text-slate-400');
+        });
+
+        // Tambahkan status aktif ke yang diklik
+        element.classList.add('text-emerald-600', 'active', 'animate__animated', 'animate__pulse');
+        element.classList.remove('text-slate-400');
+        
+        // Haptic feedback sederhana (vibrasi hp jika didukung)
+        if (window.navigator.vibrate) {
+            window.navigator.vibrate(50);
+        }
+    }
+
+    // Perbaikan logika popup agar lebih halus
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        
+        setTimeout(() => {
+            const popup = document.getElementById('pwa-popup');
+            popup.classList.remove('hidden');
+        }, 4000); // Muncul setelah 4 detik
     });
-    element.classList.add('text-emerald-600', 'active');
-    element.classList.remove('text-slate-400');
-  }
+
+    document.getElementById('pwa-later').addEventListener('click', () => {
+        const popup = document.getElementById('pwa-popup');
+        popup.classList.add('animate__animated', 'animate__fadeOutDown');
+        setTimeout(() => popup.classList.add('hidden'), 1000);
+    });
 </script>
 </body>
 </html>
