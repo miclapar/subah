@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" href="https://ik.imagekit.io/qusnzijssq/logo%20miclapar.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MI Clapar Digital | Portal Orang Tua & Guru</title>
+    <title>MI Clapar Digital</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -15,20 +15,26 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
-        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
         .hero-bg { background: linear-gradient(rgba(6, 95, 70, 0.8), rgba(5, 150, 105, 0.9)), url('https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; }
         
-        /* Marquee */
+        /* Marquee Animation */
         @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .animate-marquee { display: inline-block; animation: marquee 20s linear infinite; white-space: nowrap; }
+        .animate-marquee { display: inline-block; animation: marquee 25s linear infinite; white-space: nowrap; }
         
+        /* Gallery Scroll */
         @keyframes scroll-gallery { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-scroll { display: flex; width: max-content; animation: scroll-gallery 30s linear infinite; }
-        
-        .gallery-item { flex-shrink: 0; width: 160px; height: 100px; margin-right: 12px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: #eee; }
+        .animate-scroll { display: flex; width: max-content; animation: scroll-gallery 40s linear infinite; }
+        .gallery-item { flex-shrink: 0; width: 160px; height: 100px; margin-right: 12px; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+
+        /* Dynamic Colors for Nav */
+        .nav-item { transition: all 0.3s ease; color: #94a3b8; }
+        .nav-item.active[data-menu="home"] { color: #10b981; }
+        .nav-item.active[data-menu="materi"] { color: #3b82f6; }
+        .nav-item.active[data-menu="wali"] { color: #f59e0b; }
+        .nav-item.active[data-menu="profil"] { color: #8b5cf6; }
+
         .pulse-btn { animation: pulse-green 2s infinite; }
         @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
-        .nav-item.active { color: #10b981; }
     </style>
 </head>
 <body>
@@ -36,7 +42,7 @@
     <section class="hero-bg pb-24 pt-8 px-6 rounded-b-[50px] shadow-2xl relative overflow-hidden">
         <div class="max-w-4xl mx-auto mb-6 overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 rounded-full py-2 px-4 relative z-10">
             <div id="marquee-info" class="animate-marquee text-[10px] font-bold text-emerald-100 tracking-wider uppercase">
-                Menyambungkan ke sistem...
+                Menyambungkan ke sistem database MI Clapar...
             </div>
         </div>
 
@@ -45,30 +51,29 @@
                 <img src="https://ik.imagekit.io/qusnzijssq/logo%20miclapar.png" class="w-12 h-12 bg-white/20 p-1 rounded-2xl">
                 <div>
                     <h1 class="text-white font-extrabold text-xl leading-none">MI CLAPAR</h1>
-                    <p class="text-emerald-200 text-[10px] tracking-[0.3em] font-semibold uppercase mt-1">Subah - Batang</p>
+                    <p class="text-emerald-200 text-[10px] tracking-[0.3em] font-semibold uppercase mt-1">Digital Portal</p>
                 </div>
             </div>
-            <button onclick="requestNotificationPermission()" class="bg-white/10 p-3 rounded-2xl text-white"><i class="fas fa-bell"></i></button>
+            <button onclick="requestNotificationPermission()" class="bg-white/10 p-3 rounded-2xl text-white active:scale-90 transition"><i class="fas fa-bell"></i></button>
         </nav>
 
         <div class="max-w-4xl mx-auto relative z-10">
-            <h2 class="text-3xl font-extrabold text-white mb-4 leading-tight">Selamat Datang di <br><span class="text-emerald-300">Madrasah Digital</span></h2>
-            <div class="glass-card p-5 rounded-[32px] shadow-2xl mt-6">
+            <div class="glass-card p-5 rounded-[32px] shadow-2xl bg-white/80 backdrop-blur-md">
                 <div class="flex items-center gap-4 mb-4">
-                    <img src="https://ui-avatars.com/api/?name=Siswa+MI&background=059669&color=fff" class="w-14 h-14 rounded-2xl border-2 border-emerald-500">
+                    <img src="https://ui-avatars.com/api/?name=Wali+Murid&background=059669&color=fff" class="w-12 h-12 rounded-xl border-2 border-emerald-500">
                     <div>
-                        <h4 class="font-bold text-slate-800">Halo, Orang Tua Siswa</h4>
-                        <p class="text-xs text-slate-500 italic">Info akademik terbaru</p>
+                        <h4 class="font-bold text-slate-800 text-sm">Dashboard Wali Murid</h4>
+                        <p class="text-[10px] text-slate-500 italic">Update harian ananda</p>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-3">
-                    <div class="bg-emerald-50 p-3 rounded-2xl text-center">
-                        <p class="text-[10px] text-emerald-600 font-bold uppercase">Kehadiran</p>
-                        <p id="absen-val" class="text-sm font-bold text-emerald-900">--%</p>
+                    <div class="bg-emerald-50 p-3 rounded-2xl text-center border border-emerald-100">
+                        <p class="text-[9px] text-emerald-600 font-bold uppercase mb-1">Kehadiran</p>
+                        <p id="absen-val" class="text-sm font-bold text-emerald-900 leading-none">--%</p>
                     </div>
-                    <div class="bg-blue-50 p-3 rounded-2xl text-center">
-                        <p class="text-[10px] text-blue-600 font-bold uppercase">Hafalan</p>
-                        <p id="hafalan-val" class="text-sm font-bold text-blue-900">Memuat...</p>
+                    <div class="bg-blue-50 p-3 rounded-2xl text-center border border-blue-100">
+                        <p class="text-[9px] text-blue-600 font-bold uppercase mb-1">Hafalan</p>
+                        <p id="hafalan-val" class="text-sm font-bold text-blue-900 leading-none">...</p>
                     </div>
                 </div>
             </div>
@@ -77,122 +82,145 @@
 
     <main class="max-w-4xl mx-auto px-6 -mt-10 relative z-20 pb-32">
         <div class="grid grid-cols-4 gap-4 mb-8">
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-emerald-600 border border-emerald-50"><i class="fas fa-calendar-check text-xl"></i></div><span class="text-[10px] font-bold mt-2">Absen</span></div>
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-blue-600 border border-blue-50"><i class="fas fa-file-invoice text-xl"></i></div><span class="text-[10px] font-bold mt-2">Nilai</span></div>
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-amber-500 border border-amber-50"><i class="fas fa-bullhorn text-xl"></i></div><span class="text-[10px] font-bold mt-2">Info</span></div>
-            <div class="flex flex-col items-center"><div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-purple-600 border border-purple-50"><i class="fas fa-hand-holding-heart text-xl"></i></div><span class="text-[10px] font-bold mt-2">Donasi</span></div>
+            <button onclick="handleQuickAction('Absen', this, 'emerald')" class="flex flex-col items-center group">
+                <div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-slate-400 group-hover:text-emerald-600 border border-slate-50 transition-all duration-300">
+                    <i class="fas fa-calendar-check text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-slate-600">Absen</span>
+            </button>
+            <button onclick="handleQuickAction('Nilai', this, 'blue')" class="flex flex-col items-center group">
+                <div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-slate-400 group-hover:text-blue-600 border border-slate-50 transition-all duration-300">
+                    <i class="fas fa-file-invoice text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-slate-600">Nilai</span>
+            </button>
+            <button onclick="handleQuickAction('Info', this, 'amber')" class="flex flex-col items-center group">
+                <div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-slate-400 group-hover:text-amber-500 border border-slate-50 transition-all duration-300">
+                    <i class="fas fa-bullhorn text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-slate-600">Info</span>
+            </button>
+            <button onclick="handleQuickAction('Donasi', this, 'purple')" class="flex flex-col items-center group">
+                <div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-slate-400 group-hover:text-purple-600 border border-slate-50 transition-all duration-300">
+                    <i class="fas fa-hand-holding-heart text-xl"></i>
+                </div>
+                <span class="text-[10px] font-bold mt-2 text-slate-600">Donasi</span>
+            </button>
         </div>
 
-        <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2"><i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan Madrasah</h3>
-        <div class="gallery-container overflow-hidden mb-8 relative rounded-2xl">
+        <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2"><i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan</h3>
+        <div class="gallery-container overflow-hidden mb-8 relative rounded-2xl bg-white p-2">
             <div id="gallery-wrapper" class="animate-scroll"></div>
         </div>
 
         <div class="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100">
-            <h4 class="font-extrabold text-slate-800 mb-4">Agenda Terdekat</h4>
-            <div id="agenda-list" class="space-y-4">
-                <p class="text-xs text-slate-400">Mencari agenda...</p>
-            </div>
+            <h4 class="font-extrabold text-slate-800 mb-4 flex justify-between items-center">
+                Agenda Terdekat <span class="text-[10px] text-emerald-500 font-normal">Lihat Semua</span>
+            </h4>
+            <div id="agenda-list" class="space-y-4"></div>
         </div>
     </main>
 
-    <div id="pwa-popup" class="fixed bottom-24 left-4 right-4 z-[100] hidden">
-        <div class="bg-slate-900/95 backdrop-blur-lg text-white p-5 rounded-[30px] shadow-2xl flex items-center justify-between border border-white/10 animate__animated animate__bounceInUp">
-            <div class="flex items-center gap-3">
-                <img src="https://ik.imagekit.io/qusnzijssq/logo%20miclapar.png" class="w-10 h-10 bg-white p-1 rounded-xl">
-                <div><h5 class="text-sm font-bold">Aplikasi Digital</h5><p class="text-[10px] text-emerald-400">Instal di layar utama</p></div>
-            </div>
-            <button id="pwa-install" class="bg-emerald-500 px-4 py-2 rounded-xl text-xs font-bold">INSTALL</button>
+    <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-slate-100 px-6 py-3 flex justify-between items-center z-50 rounded-t-[35px] shadow-2xl">
+        <button onclick="changeMenu(this, 'home')" data-menu="home" class="nav-item active flex flex-col items-center"><i class="fas fa-home text-xl"></i><span class="text-[9px] font-bold mt-1">HOME</span></button>
+        <button onclick="changeMenu(this, 'materi')" data-menu="materi" class="nav-item flex flex-col items-center"><i class="fas fa-book-open text-xl"></i><span class="text-[9px] font-bold mt-1">MATERI</span></button>
+        
+        <div onclick="alert('Membuka Scan QR Madrasah...')" class="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg -mt-14 border-[6px] border-slate-50 pulse-btn active:scale-90 transition cursor-pointer">
+            <i class="fas fa-qrcode text-xl"></i>
         </div>
-    </div>
 
-    <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 px-6 py-3 flex justify-between items-center z-50 rounded-t-[30px] shadow-lg">
-        <button onclick="changeMenu(this)" class="nav-item active flex flex-col items-center"><i class="fas fa-home text-xl"></i><span class="text-[9px] font-bold mt-1">HOME</span></button>
-        <button onclick="changeMenu(this)" class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-book-open text-xl"></i><span class="text-[9px] font-bold mt-1">MATERI</span></button>
-        <div class="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg -mt-12 border-[6px] border-[#f8fafc] pulse-btn active:scale-90 transition"><i class="fas fa-qrcode text-xl"></i></div>
-        <button onclick="changeMenu(this)" class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-users text-xl"></i><span class="text-[9px] font-bold mt-1">WALI</span></button>
-        <button onclick="changeMenu(this)" class="nav-item text-slate-400 flex flex-col items-center"><i class="fas fa-user-circle text-xl"></i><span class="text-[9px] font-bold mt-1">PROFIL</span></button>
+        <button onclick="changeMenu(this, 'wali')" data-menu="wali" class="nav-item flex flex-col items-center"><i class="fas fa-users text-xl"></i><span class="text-[9px] font-bold mt-1">WALI</span></button>
+        <button onclick="changeMenu(this, 'profil')" data-menu="profil" class="nav-item flex flex-col items-center"><i class="fas fa-user-circle text-xl"></i><span class="text-[9px] font-bold mt-1">PROFIL</span></button>
     </div>
 
     <script>
-        const SHEETS_INFO = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=942260017&single=true&output=csv';
-        const SHEETS_AKADEMIK = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1892437284&single=true&output=csv';
-        const SHEETS_GALERI = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1377707417&single=true&output=csv';
+        const URLS = {
+            info: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=942260017&single=true&output=csv',
+            akad: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1892437284&single=true&output=csv',
+            gale: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT-ChtIqUlL45D3tHLnDRQ6SX-dkwbxT9Vd-pwGOtNbol_tKRnuYcm88kEqBzBQX1PNq0fE4fo2B0KC/pub?gid=1377707417&single=true&output=csv'
+        };
 
         async function initApp() {
             try {
-                const [info, akad, gale] = await Promise.all([
-                    fetch(SHEETS_INFO).then(r => r.text()),
-                    fetch(SHEETS_AKADEMIK).then(r => r.text()),
-                    fetch(SHEETS_GALERI).then(r => r.text())
+                const [infoText, akadText, galeText] = await Promise.all([
+                    fetch(URLS.info).then(r => r.text()),
+                    fetch(URLS.akad).then(r => r.text()),
+                    fetch(URLS.gale).then(r => r.text())
                 ]);
-                renderInfo(info);
-                renderAkademik(akad);
-                renderGaleri(gale);
-                renderAgenda(info); // Agenda menggunakan data dari sheet Info
-            } catch (e) { console.error(e); }
-        }
 
-        function renderInfo(csv) {
-            const rows = csv.split('\n').slice(1);
-            let text = rows.filter(r => r.includes('Aktif')).map(r => r.split(',')[2]).join(' • ');
-            document.getElementById('marquee-info').innerHTML = text || "Selamat Datang di MI Clapar Digital";
-        }
+                // Render Data
+                const infoRows = infoText.split('\n').slice(1);
+                
+                // 1. Marquee & Agenda
+                let marqueeHtml = "";
+                let agendaHtml = "";
+                infoRows.forEach(row => {
+                    const col = row.split(',');
+                    if(col[3]?.trim().includes('Aktif')) {
+                        marqueeHtml += `${col[2]} • `;
+                        agendaHtml += `
+                            <div class="flex items-center gap-4 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                                <div class="bg-white text-emerald-600 font-bold px-3 py-1 rounded-xl shadow-sm text-xs">${col[0]}</div>
+                                <p class="text-xs font-bold text-slate-700">${col[2]}</p>
+                            </div>`;
+                    }
+                });
+                document.getElementById('marquee-info').innerHTML = marqueeHtml || "MI Islamiyah Clapar Digital";
+                document.getElementById('agenda-list').innerHTML = agendaHtml || "<p class='text-xs text-slate-400'>Belum ada agenda terdekat.</p>";
 
-        function renderAgenda(csv) {
-            const rows = csv.split('\n').slice(1);
-            const list = document.getElementById('agenda-list');
-            let html = "";
-            rows.forEach(r => {
-                const cols = r.split(',');
-                if(cols.length > 2 && cols[3]?.trim() === 'Aktif') {
-                    // Misal kolom 1 adalah tanggal "15 Mei"
-                    html += `
-                    <div class="flex items-center gap-4">
-                        <div class="bg-emerald-100 text-emerald-700 w-12 h-12 rounded-2xl flex flex-col items-center justify-center">
-                            <span class="text-xs font-bold leading-none">${cols[0]}</span>
-                        </div>
-                        <div>
-                            <p class="text-sm font-bold text-slate-800">${cols[2]}</p>
-                            <p class="text-[10px] text-slate-500">Klik untuk info detail</p>
-                        </div>
-                    </div>`;
+                // 2. Akademik
+                const akadData = akadText.split('\n')[1]?.split(',');
+                if(akadData) {
+                    document.getElementById('absen-val').innerText = (akadData[3] || '98') + '%';
+                    document.getElementById('hafalan-val').innerText = akadData[4] || 'Surah...';
                 }
+
+                // 3. Galeri
+                const galeRows = galeText.split('\n').slice(1);
+                let galeHtml = galeRows.map(r => {
+                    const url = r.split(',')[3]?.trim();
+                    return url ? `<div class="gallery-item"><img src="${url}" class="w-full h-full object-cover"></div>` : '';
+                }).join('');
+                document.getElementById('gallery-wrapper').innerHTML = galeHtml + galeHtml;
+
+            } catch (e) { console.log("Gagal memuat data Google Sheets"); }
+        }
+
+        // Logic Quick Action (Absen, Nilai, dll)
+        function handleQuickAction(name, el, color) {
+            // Beri getaran
+            if(navigator.vibrate) navigator.vibrate(50);
+            
+            // Ubah warna ikon sementara
+            const iconBox = el.querySelector('div');
+            const originalColor = "text-slate-400";
+            const targetColor = color === 'emerald' ? 'text-emerald-600' : 
+                                color === 'blue' ? 'text-blue-600' : 
+                                color === 'amber' ? 'text-amber-500' : 'text-purple-600';
+            
+            iconBox.classList.replace(originalColor, targetColor);
+            iconBox.classList.add('scale-110', 'bg-slate-50');
+
+            setTimeout(() => {
+                alert("Membuka Menu " + name + "...");
+                iconBox.classList.replace(targetColor, originalColor);
+                iconBox.classList.remove('scale-110', 'bg-slate-50');
+            }, 300);
+        }
+
+        // Logic Navigasi Bawah
+        function changeMenu(btn, type) {
+            document.querySelectorAll('.nav-item').forEach(i => {
+                i.classList.remove('active');
+                i.style.color = "#94a3b8"; // Reset warna ke abu-abu
             });
-            list.innerHTML = html || "<p class='text-xs text-slate-400'>Belum ada agenda aktif.</p>";
-        }
-
-        function renderAkademik(csv) {
-            const data = csv.split('\n')[1]?.split(',');
-            if(data) {
-                document.getElementById('absen-val').innerText = (data[3] || '98') + '%';
-                document.getElementById('hafalan-val').innerHTML = `${data[4]} <span class="text-[10px] block font-normal text-blue-400">(${data[5]})</span>`;
-            }
-        }
-
-        function renderGaleri(csv) {
-            const rows = csv.split('\n').slice(1);
-            const wrapper = document.getElementById('gallery-wrapper');
-            let items = rows.map(r => {
-                const url = r.split(',')[3]?.trim();
-                return url ? `<div class="gallery-item"><img src="${url}" class="w-full h-full object-cover"></div>` : '';
-            }).join('');
-            wrapper.innerHTML = items + items;
-        }
-
-        // PWA & UI
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            setTimeout(() => document.getElementById('pwa-popup').classList.remove('hidden'), 3000);
-        });
-        document.getElementById('pwa-install').addEventListener('click', () => {
-            if(deferredPrompt) { deferredPrompt.prompt(); deferredPrompt = null; }
-        });
-        function changeMenu(btn) {
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.replace('active', 'text-slate-400'));
-            btn.classList.add('active'); btn.classList.remove('text-slate-400');
+            
+            btn.classList.add('active');
+            // Warna spesifik tiap menu
+            const colors = { home: '#10b981', materi: '#3b82f6', wali: '#f59e0b', profil: '#8b5cf6' };
+            btn.style.color = colors[type];
+            
+            if(navigator.vibrate) navigator.vibrate(30);
         }
 
         initApp();
