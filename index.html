@@ -2,126 +2,111 @@
 <html lang="id">
 <head>
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#059669">
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2942/2942503.png">
+    <meta name="theme-color" content="#059669">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2942/2942503.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MI Clapar Digital | Portal Orang Tua & Guru</title>
+    
+    <!-- CSS Libraries -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            transition: transform 0.3s ease;
+            animation: fadeInUp 0.8s ease-out; 
+        }
+
         .hero-bg { 
             background: linear-gradient(rgba(6, 95, 70, 0.8), rgba(5, 150, 105, 0.9)), 
             url('https://images.unsplash.com/photo-1577891772227-d263f5e3c960?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');
             background-size: cover; background-position: center;
         }
-        <style>
-    @keyframes marquee {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-    }
-    
-    .animate-marquee {
-        display: inline-block;
-        animation: marquee 20s linear infinite;
-    }
 
-    /* Agar marquee berhenti saat disentuh (opsional) */
-    .animate-marquee:active {
-        animation-play-state: paused;
-    }
-</style>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<style>
-    /* Animasi Custom */
-    @keyframes pulse-green {
-        0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-        70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-    .pulse-btn { animation: pulse-green 2s infinite; }
-    
-    .nav-item { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    .nav-item:active { transform: scale(0.8); }
-    
-    .glass-card { 
-        transition: transform 0.3s ease;
-        animation: fadeInUp 0.8s ease-out; 
-    }
-</style>
-    <style>
-    /* Transisi menu bawah */
-    .nav-item {
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
-    }
+        /* Animasi Marquee Teks */
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        .animate-marquee:active { animation-play-state: paused; }
 
-    /* Efek saat ikon aktif (Warna-warni) */
-    .nav-item.active[data-menu="home"] { color: #10b981; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5)); }
-    .nav-item.active[data-menu="materi"] { color: #3b82f6; filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)); }
-    .nav-item.active[data-menu="wali"] { color: #f59e0b; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5)); }
-    .nav-item.active[data-menu="profil"] { color: #8b5cf6; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5)); }
+        /* Animasi Pulse Button */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .pulse-btn { animation: pulse-green 2s infinite; }
 
-    /* Animasi membal saat diklik */
-    .nav-item:active { transform: scale(0.7); }
-    
-    /* Indikator titik di bawah ikon aktif */
-    .nav-item.active::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        width: 5px;
-        height: 5px;
-        background: currentColor;
-        border-radius: 50%;
-    }
-</style>
-    <style>
-    /* Animasi Marquee Galeri */
-    @keyframes scroll-gallery {
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); } /* Geser setengah karena konten diduplikasi */
-    }
+        /* Bottom Nav Styling */
+        .nav-item {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .nav-item:active { transform: scale(0.7); }
+        .nav-item.active[data-menu="home"] { color: #10b981; filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5)); }
+        .nav-item.active[data-menu="materi"] { color: #3b82f6; filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)); }
+        .nav-item.active[data-menu="wali"] { color: #f59e0b; filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5)); }
+        .nav-item.active[data-menu="profil"] { color: #8b5cf6; filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.5)); }
+        
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            width: 5px;
+            height: 5px;
+            background: currentColor;
+            border-radius: 50%;
+        }
 
-    .animate-scroll {
-        display: flex;
-        width: max-content; /* Memastikan container selebar jumlah gambar */
-        animation: scroll-gallery 30s linear infinite;
-    }
-
-    /* Berhenti saat disentuh agar wali murid bisa melihat foto */
-    .gallery-container:active .animate-scroll {
-        animation-play-state: paused;
-    }
-
-    .gallery-item {
-        flex-shrink: 0;
-        width: 160px; /* Lebar foto tetap rapi */
-        height: 100px;
-        margin-right: 12px;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-</style>
+        /* Animasi Marquee Galeri */
+        @keyframes scroll-gallery {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll-gallery 30s linear infinite;
+        }
+        .gallery-container:active .animate-scroll { animation-play-state: paused; }
+        .gallery-item {
+            flex-shrink: 0;
+            width: 160px;
+            height: 100px;
+            margin-right: 12px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
 
     <!-- HERO SECTION -->
     <section class="hero-bg pb-24 pt-8 px-6 rounded-b-[50px] shadow-2xl relative overflow-hidden">
         <div class="max-w-4xl mx-auto mb-6 overflow-hidden whitespace-nowrap bg-white/10 backdrop-blur-sm border border-white/20 rounded-full py-2 px-4 relative z-10">
-        <div class="inline-block animate-marquee text-[10px] font-bold text-emerald-100 tracking-wider uppercase">
-            ✨ Info Madrasah: Penerimaan Peserta Didik Baru (PPDB) Tahun Pelajaran 2026/2027 telah dibuka! Segera daftar di kantor Madrasah. ✨ &nbsp;&nbsp;&nbsp;&nbsp; 📅 Agenda: UTS mulai 15 Mei 2026.
+            <div class="inline-block animate-marquee text-[10px] font-bold text-emerald-100 tracking-wider uppercase">
+                ✨ Info Madrasah: Penerimaan Peserta Didik Baru (PPDB) Tahun Pelajaran 2026/2027 telah dibuka! Segera daftar di kantor Madrasah. ✨ &nbsp;&nbsp;&nbsp;&nbsp; 📅 Agenda: UTS mulai 15 Mei 2026.
+            </div>
         </div>
-    </div>
-        <!-- Logo & Branding -->
+
         <nav class="flex justify-between items-center max-w-4xl mx-auto mb-10 relative z-10">
             <div class="flex items-center gap-3">
                 <div class="bg-white/20 backdrop-blur-md p-1 rounded-2xl border border-white/30">
-                    <!-- Ganti URL ini dengan link logo MI Clapar asli Anda -->
                     <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" alt="Logo" class="w-12 h-12 object-contain">
                 </div>
                 <div>
@@ -139,7 +124,6 @@
         <div class="max-w-4xl mx-auto relative z-10">
             <h2 class="text-3xl font-extrabold text-white mb-4 leading-tight">Selamat Datang di <br><span class="text-emerald-300">Madrasah Digital</span></h2>
             
-            <!-- Info Card Orang Tua (Floating) -->
             <div class="glass-card p-5 rounded-[32px] shadow-2xl mt-6">
                 <div class="flex items-center gap-4 mb-4">
                     <div class="relative">
@@ -167,7 +151,6 @@
 
     <!-- QUICK ACTIONS -->
     <main class="max-w-4xl mx-auto px-6 -mt-10 relative z-20 pb-20">
-        <!-- Dashboard Guru & Data -->
         <div class="grid grid-cols-4 gap-4 mb-8">
             <div class="flex flex-col items-center">
                 <div class="bg-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center text-emerald-600 mb-2 border border-emerald-50 hover:bg-emerald-600 hover:text-white transition-all cursor-pointer">
@@ -195,48 +178,28 @@
             </div>
         </div>
 
-        <!-- GALERI KEGIATAN BERGERAK -->
-<h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2 px-6">
-    <i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan Madrasah
-</h3>
+        <h3 class="font-extrabold text-slate-800 text-lg mb-4 flex items-center gap-2 px-6">
+            <i class="fas fa-camera-retro text-emerald-500"></i> Kegiatan Madrasah
+        </h3>
 
-<div class="gallery-container overflow-hidden mb-8 relative">
-    <!-- Gradient Fade (Opsional: agar sisi kiri kanan halus) -->
-    <div class="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f8fafc] to-transparent z-10"></div>
-    <div class="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#f8fafc] to-transparent z-10"></div>
+        <div class="gallery-container overflow-hidden mb-8 relative">
+            <div class="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f8fafc] to-transparent z-10"></div>
+            <div class="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#f8fafc] to-transparent z-10"></div>
 
-    <div class="animate-scroll">
-        <!-- SET PERTAMA -->
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
+            <div class="animate-scroll">
+                <!-- SET PERTAMA -->
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <!-- SET KEDUA -->
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover"></div>
+            </div>
         </div>
 
-        <!-- SET KEDUA (Duplikat untuk efek tanpa henti) -->
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1523050853063-bd8012fbb72a?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1544640808-32ca72ac7f67?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-        <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1577891772227-d263f5e3c960?auto=format&fit=crop&w=300&q=80" class="w-full h-full object-cover">
-        </div>
-    </div>
-</div>
-
-        <!-- INFO PENTING (Info Orang Tua) -->
         <div class="bg-white rounded-[32px] p-6 shadow-sm border border-slate-100">
             <h4 class="font-extrabold text-slate-800 mb-4">Agenda Terdekat</h4>
             <div class="space-y-4">
@@ -263,161 +226,108 @@
             </div>
         </div>
     </main>
-<!-- Popup PWA -->
-<div id="pwa-popup" class="fixed bottom-28 left-4 right-4 z-[100] hidden">
-    <div class="bg-slate-900/95 backdrop-blur-lg text-white p-5 rounded-[30px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between border border-white/10 animate__animated animate__bounceInUp">
-        <div class="flex items-center gap-3">
-            <div class="bg-white p-1.5 rounded-2xl">
-                <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-10 h-10">
+
+    <!-- Popup PWA -->
+    <div id="pwa-popup" class="fixed bottom-28 left-4 right-4 z-[100] hidden">
+        <div class="bg-slate-900/95 backdrop-blur-lg text-white p-5 rounded-[30px] shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex items-center justify-between border border-white/10 animate__animated animate__bounceInUp">
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-1.5 rounded-2xl">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2942/2942503.png" class="w-10 h-10">
+                </div>
+                <div>
+                    <h5 class="text-sm font-bold">MI Clapar Digital</h5>
+                    <p class="text-[10px] text-emerald-400 font-medium">Instal untuk akses instan!</p>
+                </div>
             </div>
-            <div>
-                <h5 class="text-sm font-bold">MI Clapar Digital</h5>
-                <p class="text-[10px] text-emerald-400 font-medium">Instal untuk akses instan!</p>
+            <div class="flex flex-col gap-1">
+                <button id="pwa-install" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-xl text-xs font-extrabold transition-all active:scale-95 shadow-lg shadow-emerald-500/20">INSTALL</button>
+                <button id="pwa-later" class="text-[10px] font-bold text-slate-400 py-1 uppercase tracking-tighter">Nanti saja</button>
             </div>
-        </div>
-        <div class="flex flex-col gap-1">
-            <button id="pwa-install" class="bg-emerald-500 hover:bg-emerald-600 px-5 py-2 rounded-xl text-xs font-extrabold transition-all active:scale-95 shadow-lg shadow-emerald-500/20">INSTALL</button>
-            <button id="pwa-later" class="text-[10px] font-bold text-slate-400 py-1 uppercase tracking-tighter">Nanti saja</button>
         </div>
     </div>
-</div>
     
-    <!-- Bottom Navigation Bar (Ala Aplikasi Mobile) -->
+    <!-- Bottom Navigation Bar -->
     <div class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-xl border-t border-slate-100 px-6 py-3 flex justify-between items-center z-50 rounded-t-[30px] shadow-[0_-10px_25px_rgba(0,0,0,0.05)]">
-    
-    <!-- Beranda - Hijau -->
-    <button onclick="changeMenu(this, 'home')" data-menu="home" class="nav-item active flex flex-col items-center gap-1">
-        <i class="fas fa-home text-xl"></i>
-        <span class="text-[9px] font-bold uppercase">Beranda</span>
-    </button>
+        <button onclick="changeMenu(this, 'home')" data-menu="home" class="nav-item active flex flex-col items-center gap-1">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-[9px] font-bold uppercase">Beranda</span>
+        </button>
 
-    <!-- Materi - Biru -->
-    <button onclick="changeMenu(this, 'materi')" data-menu="materi" class="nav-item text-slate-400 flex flex-col items-center gap-1">
-        <i class="fas fa-book-open text-xl"></i>
-        <span class="text-[9px] font-bold uppercase">Materi</span>
-    </button>
+        <button onclick="changeMenu(this, 'materi')" data-menu="materi" class="nav-item text-slate-400 flex flex-col items-center gap-1">
+            <i class="fas fa-book-open text-xl"></i>
+            <span class="text-[9px] font-bold uppercase">Materi</span>
+        </button>
 
-    <!-- QR / Absen - Tetap Besar & Pulse -->
-    <div onclick="alert('Membuka Kamera QR...')" class="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg -mt-12 border-[6px] border-[#f8fafc] active:scale-90 transition-transform pulse-btn cursor-pointer">
-        <i class="fas fa-qrcode text-xl"></i>
+        <div onclick="alert('Membuka Kamera QR...')" class="bg-emerald-600 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg -mt-12 border-[6px] border-[#f8fafc] active:scale-90 transition-transform pulse-btn cursor-pointer">
+            <i class="fas fa-qrcode text-xl"></i>
+        </div>
+
+        <button onclick="changeMenu(this, 'wali')" data-menu="wali" class="nav-item text-slate-400 flex flex-col items-center gap-1">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-[9px] font-bold uppercase">Wali</span>
+        </button>
+
+        <button onclick="changeMenu(this, 'profil')" data-menu="profil" class="nav-item text-slate-400 flex flex-col items-center gap-1">
+            <i class="fas fa-user-circle text-xl"></i>
+            <span class="text-[9px] font-bold uppercase">Profil</span>
+        </button>
     </div>
 
-    <!-- Wali - Oranye -->
-    <button onclick="changeMenu(this, 'wali')" data-menu="wali" class="nav-item text-slate-400 flex flex-col items-center gap-1">
-        <i class="fas fa-users text-xl"></i>
-        <span class="text-[9px] font-bold uppercase">Wali</span>
-    </button>
-
-    <!-- Profil - Ungu -->
-    <button onclick="changeMenu(this, 'profil')" data-menu="profil" class="nav-item text-slate-400 flex flex-col items-center gap-1">
-        <i class="fas fa-user-circle text-xl"></i>
-        <span class="text-[9px] font-bold uppercase">Profil</span>
-    </button>
-</div>
-<script>
-  let deferredPrompt;
-  const pwaPopup = document.getElementById('pwa-popup');
-  const btnInstall = document.getElementById('pwa-install');
-  const btnLater = document.getElementById('pwa-later');
-
-  // 1. Registrasi Service Worker
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(() => {
-      console.log('SW Registered');
-    });
-  }
-
-  // 2. Tangkap event install dari browser
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Cegah Chrome memunculkan banner default
-    e.preventDefault();
-    // Simpan event agar bisa dipicu nanti
-    deferredPrompt = e;
-    
-    // Munculkan popup buatan kita setelah 3 detik
-    setTimeout(() => {
-      pwaPopup.classList.remove('hidden');
-      pwaPopup.classList.remove('translate-y-40');
-      pwaPopup.classList.add('translate-y-0');
-    }, 3000);
-  });
-
-  // 3. Logika ketika tombol Install diklik
-  btnInstall.addEventListener('click', async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log(`User response to install: ${outcome}`);
-      deferredPrompt = null;
-      hidePopup();
-    }
-  });
-
-  // 4. Logika ketika tombol Nanti diklik
-  btnLater.addEventListener('click', () => {
-    hidePopup();
-  });
-
-  function hidePopup() {
-    pwaPopup.classList.add('translate-y-40');
-    setTimeout(() => pwaPopup.classList.add('hidden'), 500);
-  }
-
-  // Logika Tambahan: Aktifkan Menu Navigasi Bawah
-      function setActive(element) {
-        // Hapus status aktif dari semua
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('text-emerald-600', 'active', 'animate__animated', 'animate__pulse');
-            item.classList.add('text-slate-400');
-        });
-
-        // Tambahkan status aktif ke yang diklik
-        element.classList.add('text-emerald-600', 'active', 'animate__animated', 'animate__pulse');
-        element.classList.remove('text-slate-400');
-        
-        // Haptic feedback sederhana (vibrasi hp jika didukung)
-        if (window.navigator.vibrate) {
-            window.navigator.vibrate(50);
-        }
-    }
-
-    // Perbaikan logika popup agar lebih halus
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        
-        setTimeout(() => {
-            const popup = document.getElementById('pwa-popup');
-            popup.classList.remove('hidden');
-        }, 4000); // Muncul setelah 4 detik
-    });
-
-    document.getElementById('pwa-later').addEventListener('click', () => {
-        const popup = document.getElementById('pwa-popup');
-        popup.classList.add('animate__animated', 'animate__fadeOutDown');
-        setTimeout(() => popup.classList.add('hidden'), 1000);
-    });
-</script>
     <script>
-    function changeMenu(element, menuName) {
-        // 1. Hapus kelas active dan warna dari semua menu
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-            item.classList.add('text-slate-400');
-        });
+        let deferredPrompt;
+        const pwaPopup = document.getElementById('pwa-popup');
+        const btnInstall = document.getElementById('pwa-install');
+        const btnLater = document.getElementById('pwa-later');
 
-        // 2. Tambahkan kelas active ke elemen yang diklik
-        element.classList.add('active');
-        element.classList.remove('text-slate-400');
-
-        // 3. Feedback Getar (Haptic) untuk Android
-        if (navigator.vibrate) {
-            navigator.vibrate(40);
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(() => {
+                console.log('SW Registered');
+            });
         }
 
-        // 4. (Opsional) Logika untuk pindah halaman atau ganti konten
-        console.log("Menu aktif: " + menuName);
-    }
-</script>
+        // PWA Install Logic
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            setTimeout(() => {
+                pwaPopup.classList.remove('hidden');
+            }, 3000);
+        });
+
+        btnInstall.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                deferredPrompt = null;
+                hidePopup();
+            }
+        });
+
+        btnLater.addEventListener('click', () => {
+            hidePopup();
+        });
+
+        function hidePopup() {
+            pwaPopup.classList.add('animate__animated', 'animate__fadeOutDown');
+            setTimeout(() => pwaPopup.classList.add('hidden'), 1000);
+        }
+
+        // Navigation Logic
+        function changeMenu(element, menuName) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+                item.classList.add('text-slate-400');
+            });
+
+            element.classList.add('active');
+            element.classList.remove('text-slate-400');
+
+            if (navigator.vibrate) {
+                navigator.vibrate(40);
+            }
+            console.log("Menu aktif: " + menuName);
+        }
+    </script>
 </body>
 </html>
