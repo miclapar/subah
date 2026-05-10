@@ -50,21 +50,36 @@
             <button onclick="triggerVibrate(100)" class="bg-white/20 p-3 rounded-2xl text-white backdrop-blur-md border border-white/30"><i class="fas fa-bell"></i></button>
         </nav>
 
-        <div class="max-w-4xl mx-auto relative z-10">
-            <div class="bg-white p-6 rounded-[35px] shadow-2xl">
-                <h4 class="font-bold text-slate-800 text-xs mb-4 uppercase tracking-widest">Pantauan Orang Tua</h4>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-emerald-50 p-4 rounded-3xl border border-emerald-100 text-center">
-                        <p class="text-[9px] text-emerald-600 font-bold uppercase mb-1">Kehadiran</p>
-                        <p id="absen-val" class="text-xl font-black text-emerald-900 leading-none">--%</p>
-                    </div>
-                    <div class="bg-blue-50 p-4 rounded-3xl border border-blue-100 text-center">
-                        <p class="text-[9px] text-blue-600 font-bold uppercase mb-1">Hafalan</p>
-                        <p id="hafalan-val" class="text-xs font-extrabold text-blue-900 leading-tight">...</p>
-                    </div>
+       <div class="max-w-4xl mx-auto relative z-10">
+    <div class="bg-white/95 backdrop-blur-sm p-5 rounded-[30px] shadow-xl border border-white/50">
+        <div class="flex items-center justify-between mb-4 px-1">
+            <h4 class="font-extrabold text-slate-800 text-[11px] uppercase tracking-widest flex items-center gap-2">
+                <i class="fas fa-user-check text-emerald-500"></i> Pantauan Orang Tua
+            </h4>
+            <span class="text-[8px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md animate-pulse">LIVE</span>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 flex items-center gap-3">
+                <div class="w-8 h-8 bg-emerald-500 rounded-xl flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-id-badge"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-[8px] text-slate-400 font-bold uppercase leading-none mb-1">Kehadiran</p>
+                    <p id="absen-val" class="text-base font-black text-slate-800 leading-none">--%</p>
+                </div>
+            </div>
+            <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100 flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-quran"></i>
+                </div>
+                <div class="text-left">
+                    <p class="text-[8px] text-slate-400 font-bold uppercase leading-none mb-1">Hafalan</p>
+                    <p id="hafalan-val" class="text-[10px] font-bold text-slate-700 leading-tight">...</p>
                 </div>
             </div>
         </div>
+    </div>
+</div>
     </section>
 
     <main class="max-w-4xl mx-auto px-6 -mt-10 relative z-20 pb-32">
