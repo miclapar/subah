@@ -115,9 +115,9 @@
                 </div>
             </div>
             <div class="flex gap-2">
-                <button class="bg-white/10 hover:bg-white/20 p-3 rounded-2xl text-white transition">
-                    <i class="fas fa-bell"></i>
-                </button>
+                <button onclick="requestNotificationPermission()" class="bg-white/10 hover:bg-white/20 p-3 rounded-2xl text-white transition active:scale-90">
+    <i class="fas fa-bell"></i>
+</button>
             </div>
         </nav>
 
@@ -328,6 +328,27 @@
             }
             console.log("Menu aktif: " + menuName);
         }
+        function requestNotificationPermission() {
+    // Cek apakah browser mendukung notifikasi
+    if (!("Notification" in window)) {
+        alert("Browser ini tidak mendukung notifikasi.");
+        return;
+    }
+
+    // Minta izin ke pengguna
+    Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+            // Contoh notifikasi selamat datang
+            new Notification("MI Clapar Digital", {
+                body: "Notifikasi berhasil diaktifkan! Anda akan menerima info terbaru.",
+                icon: "https://cdn-icons-png.flaticon.com/512/2942/2942503.png"
+            });
+            alert("Notifikasi berhasil diaktifkan!");
+        } else {
+            alert("Izin notifikasi ditolak.");
+        }
+    });
+}
     </script>
 </body>
 </html>
