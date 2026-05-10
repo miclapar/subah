@@ -18,6 +18,22 @@
             url('https://images.unsplash.com/photo-1577891772227-d263f5e3c960?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');
             background-size: cover; background-position: center;
         }
+        <style>
+    @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+    
+    .animate-marquee {
+        display: inline-block;
+        animation: marquee 20s linear infinite;
+    }
+
+    /* Agar marquee berhenti saat disentuh (opsional) */
+    .animate-marquee:active {
+        animation-play-state: paused;
+    }
+</style>
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
